@@ -1,0 +1,22 @@
+# IntelliJ
+.idea
+*.iml
+target
+
+# Eclipse
+.metadata
+.settings
+.classpath
+.project
+bin
+tmp
+
+.factorypath
+
+
+/target/
+
+/.apt_generated/
+/.apt_generated_tests/
+
+MANIFEST.MF
