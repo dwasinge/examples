@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class CrewMember extends AbstractPersistable {
 
     @NotBlank
-    private String uniqueIdentifier;
+    private String accountNumber;
 
     @NotBlank
     private String firstName;

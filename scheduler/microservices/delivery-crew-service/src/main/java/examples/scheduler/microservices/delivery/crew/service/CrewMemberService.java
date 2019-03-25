@@ -1,6 +1,7 @@
 package examples.scheduler.microservices.delivery.crew.service;
 
 import java.util.Collection;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,15 +27,18 @@ public class CrewMemberService {
         boolean alreadyExists = true;
 
         try {
-            getByUniqueIdentifier(crewMember.getUniqueIdentifier());
+            getByUniqueIdentifier(crewMember.getAccountNumber());
         } catch (ResourceNotFoundException rnfe) {
             alreadyExists = false;
         }
 
         if (alreadyExists) {
-            throw new ResourceAlreadyExistsException("resource with unique id '" + crewMember.getUniqueIdentifier()
+            throw new ResourceAlreadyExistsException("resource with unique id '" + crewMember.getAccountNumber()
                     + "' already exists.  use PUT to update resource.");
         }
+
+        // generate account number
+        crewMember.setAccountNumber(UUID.randomUUID().toString());
 
         return repository.save(crewMember);
 
@@ -43,26 +47,26 @@ public class CrewMemberService {
     public CrewMember update(CrewMember crewMember) {
 
         // get existing resource, throw not found exception if it doesn't exist
-        CrewMember persisted = getByUniqueIdentifier(crewMember.getUniqueIdentifier());
+        CrewMember persisted = getByUniqueIdentifier(crewMember.getAccountNumber());
 
         crewMember.setId(persisted.getId());
         return repository.save(crewMember);
 
     }
 
-    public CrewMember getByUniqueIdentifier(String uniqueIdentifier) {
+    public CrewMember getByUniqueIdentifier(String accountNumber) {
 
         CrewMember crewMember = null;
 
         try {
-            crewMember = repository.findByUniqueIdentifier(uniqueIdentifier);
+            crewMember = repository.findByAccountNumber(accountNumber);
         } catch (RuntimeException e) {
-            throw new RepositoryException("an error occurred during retrieving resource with id '" + uniqueIdentifier
+            throw new RepositoryException("an error occurred during retrieving resource with id '" + accountNumber
                     + "' from the repository.", e);
         }
 
         if (null == crewMember) {
-            throw new ResourceNotFoundException("no resource found with id '" + uniqueIdentifier + "'");
+            throw new ResourceNotFoundException("no resource found with id '" + accountNumber + "'");
         }
 
         return crewMember;
@@ -73,10 +77,10 @@ public class CrewMemberService {
         return repository.findAll();
     }
 
-    public CrewMember delete(String uniqueIdentifier) {
+    public CrewMember delete(String accountNumber) {
 
         // get existing resource, throw not found exception if it doesn't exist
-        CrewMember persisted = getByUniqueIdentifier(uniqueIdentifier);
+        CrewMember persisted = getByUniqueIdentifier(accountNumber);
 
         repository.deleteById(persisted.getId());
 

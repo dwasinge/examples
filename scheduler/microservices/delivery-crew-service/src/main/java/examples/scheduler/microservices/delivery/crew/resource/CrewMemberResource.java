@@ -39,9 +39,9 @@ public class CrewMemberResource {
         return service.update(crewMember);
     }
 
-    @GetMapping("/{uniqueIdentifier}")
-    public CrewMember get(@PathVariable String uniqueIdentifier) {
-        return service.getByUniqueIdentifier(uniqueIdentifier);
+    @GetMapping("/{accountNumber}")
+    public CrewMember get(@PathVariable String accountNumber) {
+        return service.getByUniqueIdentifier(accountNumber);
     }
 
     @GetMapping("/")
@@ -49,9 +49,9 @@ public class CrewMemberResource {
         return service.getAll();
     }
 
-    @DeleteMapping("{uniqueIdentifier}")
-    public CrewMember delete(@PathVariable String uniqueIdentifier) {
-        return service.delete(uniqueIdentifier);
+    @DeleteMapping("{accountNumber}")
+    public CrewMember delete(@PathVariable String accountNumber) {
+        return service.delete(accountNumber);
     }
 
     @DeleteMapping("/")

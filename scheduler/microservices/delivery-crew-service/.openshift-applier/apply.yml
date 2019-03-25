@@ -1,0 +1,33 @@
+---
+- name: Deploy Spring Boot Application with MongoDB
+  hosts: seed-hosts
+  vars:
+    app_name: delivery-crew-service
+    ci_cd_namespace: examples-scheduler-ci-cd
+    dev_namespace: examples-scheduler-dev
+    test_namespace: examples-scheduler-test
+    mongodb:
+      DATABASE_SERVICE_NAME: "{{app_name}}-mongodb"
+      MONGODB_USER: "{{app_name}}-user"
+      MONGODB_PASSWORD: "{{app_name}}-pass"
+      MONGODB_DATABASE: "{{app_name}}-db"
+    build:
+      NAME: "{{app_name}}"
+      PIPELINE_SOURCE_REPOSITORY_URL: https://github.com/dwasinge/examples.git
+      PIPELINE_SOURCE_REPOSITORY_REF: master
+      PIPELINE_CONTEXT_DIR: "scheduler/microservices/{{app_name}}"
+      S2I_BASE_IMAGE: redhat-openjdk18-openshift:1.4
+    dev:
+      NAME: "{{app_name}}"
+      PIPELINES_NAMESPACE: "{{ci_cd_namespace}}"
+      MONGODB_HOST: "{{ app_name }}-mongodb"
+      MONGO_DB_SECRET: "{{ app_name }}-mongodb"
+    test:
+      NAME: "{{app_name}}"
+      PIPELINES_NAMESPACE: "{{ci_cd_namespace}}"
+      MONGODB_HOST: "{{ app_name }}-mongodb"
+      MONGO_DB_SECRET: "{{ app_name }}-mongodb"
+  tasks:
+    - include_role:
+        name: openshift-applier/roles/openshift-applier
+

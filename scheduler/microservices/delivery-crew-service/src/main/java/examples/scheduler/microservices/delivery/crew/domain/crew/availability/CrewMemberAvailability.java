@@ -2,10 +2,10 @@ package examples.scheduler.microservices.delivery.crew.domain.crew.availability;
 
 import java.time.OffsetDateTime;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import examples.scheduler.microservices.delivery.crew.domain.common.AbstractPersistable;
-import examples.scheduler.microservices.delivery.crew.domain.crew.CrewMember;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,8 +17,8 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class CrewMemberAvailability extends AbstractPersistable {
 
-    @NotNull
-    private CrewMember crewMember;
+    @NotBlank
+    private String crewMemberId;
 
     @NotNull
     private OffsetDateTime startDateTime;
