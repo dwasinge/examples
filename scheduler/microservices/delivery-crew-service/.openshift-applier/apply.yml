@@ -21,12 +21,12 @@
       NAME: "{{app_name}}"
       PIPELINES_NAMESPACE: "{{ci_cd_namespace}}"
       MONGODB_HOST: "{{ app_name }}-mongodb"
-      MONGO_DB_SECRET: "{{ app_name }}-mongodb"
+      MONGODB_SECRET: "{{ app_name }}-mongodb"
     test:
       NAME: "{{app_name}}"
       PIPELINES_NAMESPACE: "{{ci_cd_namespace}}"
       MONGODB_HOST: "{{ app_name }}-mongodb"
-      MONGO_DB_SECRET: "{{ app_name }}-mongodb"
+      MONGODB_SECRET: "{{ app_name }}-mongodb"
   tasks:
     - include_role:
         name: openshift-applier/roles/openshift-applier
