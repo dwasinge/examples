@@ -107,7 +107,7 @@
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>${sonar.maven.plugin.version}</version>
 			</plugin>
-
+<!--
 			<plugin>
 				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>
@@ -120,7 +120,7 @@
 					</execution>
 				</executions>
 			</plugin>
-
+-->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
