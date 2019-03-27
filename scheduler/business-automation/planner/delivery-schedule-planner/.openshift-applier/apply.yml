@@ -1,0 +1,18 @@
+---
+- name: Deploy Spring Boot Application with MongoDB
+  hosts: seed-hosts
+  vars:
+    app_name: delivery-schedule-planner
+    ci_cd_namespace: examples-scheduler-ci-cd
+    dev_namespace: examples-scheduler-dev
+    test_namespace: examples-scheduler-test
+    build:
+      NAME: "{{app_name}}"
+      PIPELINE_SOURCE_REPOSITORY_URL: https://github.com/dwasinge/examples.git
+      PIPELINE_SOURCE_REPOSITORY_REF: master
+      PIPELINE_CONTEXT_DIR: "scheduler/business-automation/planner/{{app_name}}"
+      S2I_BASE_IMAGE: redhat-openjdk18-openshift:1.4
+  tasks:
+    - include_role:
+        name: openshift-applier/roles/openshift-applier
+
