@@ -46,7 +46,7 @@ pipeline {
         verifyDeployment(targetApp: "nexus", projectName: env.BUILD)
       }
     }
-
+/*
     stage('Check Dependencies'){
       steps {
 
@@ -65,7 +65,7 @@ pipeline {
 
       }
     }
-
+*/
     // Run Maven build, skipping tests
     stage('Build'){
       steps {
