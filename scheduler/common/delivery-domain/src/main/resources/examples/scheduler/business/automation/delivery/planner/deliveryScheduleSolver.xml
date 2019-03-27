@@ -1,0 +1,9 @@
+<solver>
+
+	<scanAnnotatedClasses />
+	<scoreDirectorFactory />
+	<termination>
+		<secondsSpentLimit>5</secondsSpentLimit>
+	</termination>
+
+</solver>
