@@ -15,6 +15,7 @@ openshift.withCluster() {
   env.TEST = env.BUILD.replace('ci-cd', 'test')
 
   env.MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus:8081/repository/maven-snapshots"
+  env.MVN_RELEASE_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus:8081/repository/maven-releases"
 
   env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?${env.PROJECT_NAME}-?/, '').replaceAll(/-?pipeline-?/, '').replaceAll('/','')
   env.POM_FILE = env.PIPELINE_CONTEXT_DIR ? "${env.PIPELINE_CONTEXT_DIR}/pom.xml" : "pom.xml"
@@ -70,7 +71,7 @@ pipeline {
       steps {
 
         // run build
-        sh "mvn -B clean deploy -f ${POM_FILE} -DaltDeploymentRepository=${MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY}"
+        sh "mvn -B clean deploy -f ${POM_FILE} -DaltReleaseDeploymentRepository=${MVN_RELEASE_DEPLOYMENT_REPOSITORY} -DaltSnapshotDeploymentRepository=${MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY}"
 
         // publish unit test report
         publishHTML(target: [
