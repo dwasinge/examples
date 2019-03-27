@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import examples.scheduler.microservices.delivery.crew.domain.crew.availability.CrewMemberAvailability;
+import examples.scheduler.domain.crew.CrewMemberAvailability;
 import examples.scheduler.microservices.delivery.crew.service.CrewMemberAvailabilityService;
 
 @RestController

@@ -3,19 +3,28 @@ package examples.scheduler.domain.crew;
 import java.util.Collection;
 import java.util.Set;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import examples.scheduler.domain.common.AbstractPersistable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CrewMember {
+@EqualsAndHashCode(callSuper = true)
+public class CrewMember extends AbstractPersistable {
 
-	private String id;
+	@NotBlank
 	private String accountNumber;
+	@NotBlank
 	private String firstName;
+	@NotBlank
 	private String lastName;
+	@NotNull
 	private Set<String> skillProficiencyIdSet;
 
 	public boolean hasSkill(String skillId) {

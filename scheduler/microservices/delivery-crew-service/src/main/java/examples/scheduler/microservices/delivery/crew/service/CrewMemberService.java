@@ -6,10 +6,10 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import examples.scheduler.microservices.delivery.crew.domain.crew.CrewMember;
-import examples.scheduler.microservices.delivery.crew.exception.RepositoryException;
-import examples.scheduler.microservices.delivery.crew.exception.ResourceAlreadyExistsException;
-import examples.scheduler.microservices.delivery.crew.exception.ResourceNotFoundException;
+import examples.scheduler.domain.crew.CrewMember;
+import examples.scheduler.domain.exception.RepositoryException;
+import examples.scheduler.domain.exception.ResourceAlreadyExistsException;
+import examples.scheduler.domain.exception.ResourceNotFoundException;
 import examples.scheduler.microservices.delivery.crew.repository.CrewMemberRepository;
 
 @Component

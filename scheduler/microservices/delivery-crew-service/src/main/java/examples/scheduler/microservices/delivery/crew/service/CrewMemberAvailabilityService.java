@@ -7,10 +7,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import examples.scheduler.microservices.delivery.crew.domain.crew.availability.CrewMemberAvailability;
-import examples.scheduler.microservices.delivery.crew.exception.RepositoryException;
-import examples.scheduler.microservices.delivery.crew.exception.ResourceAlreadyExistsException;
-import examples.scheduler.microservices.delivery.crew.exception.ResourceNotFoundException;
+import examples.scheduler.domain.crew.CrewMemberAvailability;
+import examples.scheduler.domain.exception.RepositoryException;
+import examples.scheduler.domain.exception.ResourceAlreadyExistsException;
+import examples.scheduler.domain.exception.ResourceNotFoundException;
 import examples.scheduler.microservices.delivery.crew.repository.CrewMemberAvailabilityRepository;
 
 @Component

@@ -7,10 +7,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import examples.scheduler.microservices.delivery.skills.domain.Skill;
-import examples.scheduler.microservices.delivery.skills.exception.RepositoryException;
-import examples.scheduler.microservices.delivery.skills.exception.ResourceAlreadyExistsException;
-import examples.scheduler.microservices.delivery.skills.exception.ResourceNotFoundException;
+import examples.scheduler.domain.exception.RepositoryException;
+import examples.scheduler.domain.exception.ResourceAlreadyExistsException;
+import examples.scheduler.domain.exception.ResourceNotFoundException;
+import examples.scheduler.domain.skill.Skill;
 import examples.scheduler.microservices.delivery.skills.repository.SkillRepository;
 
 @Component

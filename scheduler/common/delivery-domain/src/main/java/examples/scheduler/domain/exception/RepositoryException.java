@@ -1,4 +1,4 @@
-package examples.scheduler.microservices.delivery.crew.exception;
+package examples.scheduler.domain.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

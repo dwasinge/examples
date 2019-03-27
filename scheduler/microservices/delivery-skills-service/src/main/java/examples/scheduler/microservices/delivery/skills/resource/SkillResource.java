@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import examples.scheduler.microservices.delivery.skills.domain.Skill;
+import examples.scheduler.domain.skill.Skill;
 import examples.scheduler.microservices.delivery.skills.service.SkillService;
 
 @RestController

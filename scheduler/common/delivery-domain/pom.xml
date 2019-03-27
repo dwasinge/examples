@@ -14,7 +14,9 @@
 
 		<optaplanner.version>7.14.0.Final-redhat-00004</optaplanner.version>
 		<lombok.version>1.18.4</lombok.version>
-		<junit.version>4.12</junit.version>
+
+		<spring.version>2.1.2.Final-redhat-00003</spring.version>
+		<swagger.version>2.9.2</swagger.version>
 
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -24,6 +26,23 @@
 		<jacoco.maven.plugin.version>0.8.3</jacoco.maven.plugin.version>
 
 	</properties>
+
+	<dependencyManagement>
+
+		<dependencies>
+
+			<!-- Spring -->
+			<dependency>
+				<groupId>me.snowdrop</groupId>
+				<artifactId>spring-boot-bom</artifactId>
+				<version>${spring.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+		</dependencies>
+
+	</dependencyManagement>
 
 	<dependencies>
 
@@ -41,27 +60,36 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<!-- Swagger Annotations -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+
+		<!-- Validation Annotations -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
+
 		<!-- Other -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>${lombok.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Test -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.kie.server</groupId>
-			<artifactId>kie-server-client</artifactId>
-			<version>${optaplanner.version}</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 
 	<build>

@@ -12,6 +12,8 @@
 
 	<properties>
 
+		<delivery.domain.version>1.0.0-SNAPSHOT</delivery.domain.version>
+
 		<spring.version>2.1.2.Final-redhat-00003</spring.version>
 		<swagger.version>2.9.2</swagger.version>
 
@@ -42,6 +44,13 @@
 	</dependencyManagement>
 
 	<dependencies>
+
+		<!-- Domain -->
+		<dependency>
+			<groupId>examples.scheduler.common</groupId>
+			<artifactId>delivery-domain</artifactId>
+			<version>${delivery.domain.version}</version>
+		</dependency>
 
 		<!-- Spring -->
 		<dependency>
