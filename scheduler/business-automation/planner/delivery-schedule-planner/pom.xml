@@ -13,6 +13,8 @@
 
 	<properties>
 
+		<delivery.domain.version>1.0.0-SNAPSHOT</delivery.domain.version>
+
 		<optaplanner.version>7.14.0.Final-redhat-00004</optaplanner.version>
 		<lombok.version>1.18.4</lombok.version>
 		<junit.version>4.12</junit.version>
@@ -27,6 +29,13 @@
 	</properties>
 
 	<dependencies>
+
+		<!-- Domain -->
+		<dependency>
+			<groupId>examples.scheduler.common</groupId>
+			<artifactId>delivery-domain</artifactId>
+			<version>${delivery.domain.version}</version>
+		</dependency>
 
 		<!-- Optaplanner -->
 		<dependency>

@@ -1,10 +1,10 @@
 package examples.scheduler.business.automation.delivery.planner;
 
-import examples.scheduler.business.automation.delivery.planner.domain.DeliveryRole;
-import examples.scheduler.business.automation.delivery.planner.domain.DeliveryAssignment;
-import examples.scheduler.business.automation.delivery.planner.domain.crew.CrewMember;
-import examples.scheduler.business.automation.delivery.planner.domain.crew.CrewMemberAvailability;
-import examples.scheduler.business.automation.delivery.planner.domain.crew.CrewMemberAvailabilityState;
+import examples.scheduler.domain.DeliveryRole;
+import examples.scheduler.domain.DeliveryAssignment;
+import examples.scheduler.domain.crew.CrewMember;
+import examples.scheduler.domain.crew.CrewMemberAvailability;
+import examples.scheduler.domain.crew.CrewMemberAvailabilityState;
 
 import examples.scheduler.business.automation.delivery.planner.DateTimeUtils;
 

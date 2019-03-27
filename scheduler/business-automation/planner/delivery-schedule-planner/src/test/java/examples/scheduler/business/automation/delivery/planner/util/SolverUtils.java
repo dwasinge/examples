@@ -6,7 +6,7 @@ import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 
 import examples.scheduler.business.automation.delivery.planner.SolverTest;
-import examples.scheduler.business.automation.delivery.planner.domain.DeliverySchedule;
+import examples.scheduler.domain.DeliverySchedule;
 
 public class SolverUtils {
 

@@ -10,13 +10,13 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import examples.scheduler.business.automation.delivery.planner.domain.DeliveryAssignment;
-import examples.scheduler.business.automation.delivery.planner.domain.DeliveryRole;
-import examples.scheduler.business.automation.delivery.planner.domain.DeliverySchedule;
-import examples.scheduler.business.automation.delivery.planner.domain.crew.CrewMember;
-import examples.scheduler.business.automation.delivery.planner.domain.crew.CrewMemberAvailability;
-import examples.scheduler.business.automation.delivery.planner.domain.crew.CrewMemberAvailabilityState;
 import examples.scheduler.business.automation.delivery.planner.util.SolverUtils;
+import examples.scheduler.domain.DeliveryAssignment;
+import examples.scheduler.domain.DeliveryRole;
+import examples.scheduler.domain.DeliverySchedule;
+import examples.scheduler.domain.crew.CrewMember;
+import examples.scheduler.domain.crew.CrewMemberAvailability;
+import examples.scheduler.domain.crew.CrewMemberAvailabilityState;
 
 public class SolverTest {
 
