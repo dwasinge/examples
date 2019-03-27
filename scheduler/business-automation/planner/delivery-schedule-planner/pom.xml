@@ -13,7 +13,7 @@
 
 	<properties>
 
-		<delivery.domain.version>1.0.0-SNAPSHOT</delivery.domain.version>
+		<delivery.domain.version>0.0.1</delivery.domain.version>
 
 		<optaplanner.version>7.14.0.Final-redhat-00004</optaplanner.version>
 		<lombok.version>1.18.4</lombok.version>
