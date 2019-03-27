@@ -1,4 +1,4 @@
-package examples.scheduler.business.automation.delivery.planner.domain;
+package examples.scheduler.domain;
 
 import java.util.Set;
 

@@ -1,4 +1,4 @@
-package examples.scheduler.business.automation.delivery.planner.domain.skill;
+package examples.scheduler.domain.skill;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

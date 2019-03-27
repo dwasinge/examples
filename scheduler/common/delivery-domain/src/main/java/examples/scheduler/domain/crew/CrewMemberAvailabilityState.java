@@ -1,4 +1,4 @@
-package examples.scheduler.business.automation.delivery.planner.domain.crew;
+package examples.scheduler.domain.crew;
 
 public enum CrewMemberAvailabilityState {
     UNAVAILABLE, UNDESIRED, DESIRED;

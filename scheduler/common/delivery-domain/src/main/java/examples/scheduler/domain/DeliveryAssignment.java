@@ -1,4 +1,4 @@
-package examples.scheduler.business.automation.delivery.planner.domain;
+package examples.scheduler.domain;
 
 import java.time.OffsetDateTime;
 
@@ -7,7 +7,7 @@ import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
-import examples.scheduler.business.automation.delivery.planner.domain.crew.CrewMember;
+import examples.scheduler.domain.crew.CrewMember;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

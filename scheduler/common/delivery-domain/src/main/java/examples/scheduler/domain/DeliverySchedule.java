@@ -1,4 +1,4 @@
-package examples.scheduler.business.automation.delivery.planner.domain;
+package examples.scheduler.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +17,8 @@ import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScore;
 import org.optaplanner.persistence.jaxb.api.score.buildin.hardmediumsoft.HardMediumSoftScoreJaxbXmlAdapter;
 
-import examples.scheduler.business.automation.delivery.planner.domain.crew.CrewMember;
-import examples.scheduler.business.automation.delivery.planner.domain.crew.CrewMemberAvailability;
-import examples.scheduler.business.automation.delivery.planner.domain.skill.Skill;
+import examples.scheduler.domain.crew.CrewMember;
+import examples.scheduler.domain.crew.CrewMemberAvailability;
 import lombok.Data;
 
 @Data
