@@ -9,8 +9,9 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.optaplanner.core.api.solver.Solver;
+import org.optaplanner.core.api.solver.SolverFactory;
 
-import examples.scheduler.business.automation.delivery.planner.util.SolverUtils;
 import examples.scheduler.domain.DeliveryAssignment;
 import examples.scheduler.domain.DeliveryRole;
 import examples.scheduler.domain.DeliverySchedule;
@@ -20,6 +21,8 @@ import examples.scheduler.domain.crew.CrewMemberAvailabilityState;
 
 public class SolverTest {
 
+	private static final String SOLVER_XML = "deliveryScheduleSolver-test.xml";
+
 	@Test
 	public void testSolveAllCrewAvailable() {
 
@@ -27,8 +30,7 @@ public class SolverTest {
 		DeliverySchedule unsolved = createUnsolvedSchedule();
 
 		// when
-		DeliverySchedule solved = SolverUtils.assignAircrewToDelivery(unsolved,
-				"examples/scheduler/business/automation/delivery/planner/deliveryScheduleSolver.xml");
+		DeliverySchedule solved = solve(unsolved, SOLVER_XML);
 		Assert.assertNotNull(solved);
 
 		// then
@@ -57,8 +59,7 @@ public class SolverTest {
 		unsolved.getCrewMemberAvailabilityList().add(availability);
 
 		// when
-		DeliverySchedule solved = SolverUtils.assignAircrewToDelivery(unsolved,
-				"examples/scheduler/business/automation/delivery/planner/deliveryScheduleSolver.xml");
+		DeliverySchedule solved = solve(unsolved, SOLVER_XML);
 		Assert.assertNotNull(solved);
 
 		// then
@@ -89,10 +90,14 @@ public class SolverTest {
 				.addAll(new ArrayList<>(Arrays.asList(pilot, navigator, deliveryBoy, robotDeliveryBoy)));
 
 		// Crew
-		CrewMember turanga = new CrewMember("0", "0", "Taranga", "Leela", new HashSet<>(Arrays.asList("0")));
-		CrewMember philip = new CrewMember("1", "1", "Philip", "Fry", new HashSet<>(Arrays.asList("1", "2")));
-		CrewMember bender = new CrewMember("2", "2", "Bender", "Rodriquez", new HashSet<>(Arrays.asList("2", "3")));
-		CrewMember amy = new CrewMember("3", "3", "Amy", "Wong", new HashSet<>(Arrays.asList("1")));
+		CrewMember turanga = new CrewMember("0", "Taranga", "Leela", new HashSet<>(Arrays.asList("0")));
+		turanga.setId("0");
+		CrewMember philip = new CrewMember("1", "Philip", "Fry", new HashSet<>(Arrays.asList("1", "2")));
+		philip.setId("1");
+		CrewMember bender = new CrewMember("2", "Bender", "Rodriquez", new HashSet<>(Arrays.asList("2", "3")));
+		bender.setId("2");
+		CrewMember amy = new CrewMember("3", "Amy", "Wong", new HashSet<>(Arrays.asList("1")));
+		amy.setId("3");
 
 		unsolved.getCrewMemberList().addAll(new ArrayList<>(Arrays.asList(turanga, philip, bender, amy)));
 
@@ -112,6 +117,15 @@ public class SolverTest {
 				.addAll(new ArrayList<>(Arrays.asList(assignPilot, assignNavigator, assignDeliveryBoy)));
 
 		return unsolved;
+
+	}
+
+	private DeliverySchedule solve(DeliverySchedule unsolved, String solverConfigFile) {
+
+		SolverFactory<DeliverySchedule> factory = SolverFactory.createFromXmlResource(solverConfigFile);
+		Solver<DeliverySchedule> solver = factory.buildSolver();
+		
+		return solver.solve(unsolved);
 
 	}
 
