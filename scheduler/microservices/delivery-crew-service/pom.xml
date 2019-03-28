@@ -13,7 +13,7 @@
 
 	<properties>
 
-		<delivery.domain.version>1.0.0-SNAPSHOT</delivery.domain.version>
+		<delivery.domain.version>0.0.1</delivery.domain.version>
 
 		<spring.version>2.1.2.Final-redhat-00003</spring.version>
 		<swagger.version>2.9.2</swagger.version>
@@ -129,7 +129,7 @@
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>${sonar.maven.plugin.version}</version>
 			</plugin>
-
+<!-- 
 			<plugin>
 				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>
@@ -142,7 +142,7 @@
 					</execution>
 				</executions>
 			</plugin>
-
+ -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
