@@ -1,4 +1,4 @@
-package examples.scheduler.microservices.delivery.schedule.rest;
+package examples.scheduler.microservices.delivery.schedule.resource;
 
 import java.util.Collection;
 
