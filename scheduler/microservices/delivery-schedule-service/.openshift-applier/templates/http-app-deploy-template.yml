@@ -1,0 +1,211 @@
+---
+kind: Template
+apiVersion: v1
+metadata:
+  name: http-app-deploy
+  annotations:
+    openshift.io/display-name: HTTP App Deploy Template
+    description: A template to deploy your an App with a HTTP endpoint
+    iconClass: icon-cube
+    tags: http
+objects:
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    labels:
+      build: "${NAME}"
+    name: "${NAME}"
+  spec: {}
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    name: "${NAME}"
+    labels:
+      app: "${NAME}"
+  spec:
+    replicas: 1
+    selector:
+      name: "${NAME}"
+    strategy:
+      activeDeadlineSeconds: 21600
+      resources: {}
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
+    template:
+      metadata:
+        labels:
+          name: "${NAME}"
+      spec:
+        containers:
+        - env:
+            - name: SERVER_PORT
+              value: "${SERVER_PORT}"
+            - name: MANAGEMENT_CONTEXT_PATH
+              value: "${MANAGEMENT_CONTEXT_PATH}"
+            - name: MANAGEMENT_SERVER_PORT
+              value: ${MANAGEMENT_SERVER_PORT}
+            - name: AIRCREW_SERVICE_ENDPOINT
+              value: "${AIRCREW_SERVICE_ENDPOINT}"
+            - name: SKILLS_SERVICE_ENDPOINT
+              value: "${SKILLS_SERVICE_ENDPOINT}"
+            - name: KIE_SERVER_CLIENT_URL
+              value: "${KIE_SERVER_CLIENT_URL}"
+            - name: KIE_SERVER_CLIENT_USER
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: "${KIE_SERVER_CLIENT_SECRET}"
+            - name: KIE_SERVER_CLIENT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: "${KIE_SERVER_CLIENT_SECRET}"
+            - name: KIE_SERVER_CLIENT_TIMEOUT
+              value: "${KIE_SERVER_CLIENT_TIMEOUT}"
+            - name: KIE_SERVER_CLIENT_MARSHALLING_FORMAT
+              value: "${KIE_SERVER_CLIENT_MARSHALLING_FORMAT}"
+            - name: KIE_SERVER_CLIENT_EXTRA_CLASSES
+              value: "${KIE_SERVER_CLIENT_EXTRA_CLASSES}"
+          image: "${NAME}"
+          imagePullPolicy: Always
+          name: "${NAME}"
+          ports:
+          - containerPort: 8778
+            protocol: TCP
+          - containerPort: 8080
+            protocol: TCP
+          - containerPort: 8443
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: "/dev/termination-log"
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+    test: false
+    triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - "${NAME}"
+        from:
+          kind: ImageStreamTag
+          name: "${NAME}:latest"
+      type: ImageChange
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      name: "${NAME}"
+    name: "${NAME}"
+  spec:
+    ports:
+    - name: 8080-tcp
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    - name: 8443-tcp
+      port: 8443
+      protocol: TCP
+      targetPort: 8443
+    - name: 8778-tcp
+      port: 8778
+      protocol: TCP
+      targetPort: 8778
+    selector:
+      name: "${NAME}"
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Route
+  metadata:
+    labels:
+      name: "${NAME}"
+    name: "${NAME}"
+  spec:
+    port:
+      targetPort: 8080-tcp
+    to:
+      kind: Service
+      name: "${NAME}"
+      weight: 100
+    wildcardPolicy: None
+- apiVersion: v1
+  kind: RoleBinding
+  metadata:
+    name: jenkins_pipeline_edit
+  roleRef:
+    name: edit
+  subjects:
+  - kind: ServiceAccount
+    name: jenkins
+    namespace: "${PIPELINES_NAMESPACE}"
+  userNames:
+  - system:serviceaccount:${PIPELINES_NAMESPACE}:jenkins
+parameters:
+- name: NAME
+  displayName: Name
+  description: The name assigned to all objects and the related imagestream.
+  required: true
+- name: PIPELINES_NAMESPACE
+  displayName: Project/Namespace for Jenkins Pipelines
+  description: The project/namespace where the Jenkins executing pipelines is deployed.
+  required: true
+- name: SERVER_PORT
+  displayName: Application Server Port
+  description: The port the application will liston on
+  required: true
+  value: "8080"
+- name: MANAGEMENT_CONTEXT_PATH
+  displayName: Spring context for liveness and health checks
+  description: Spring context for liveness and health checks
+  required: true
+  value: /actuator
+- name: MANAGEMENT_SERVER_PORT
+  displayName: Port listening liveness and health checks
+  description: Port for liveness and health checks
+  required: true
+  value: "8081"
+- name: AIRCREW_SERVICE_ENDPOINT
+  displayName: Aircrew Service Endpoint
+  description: Service used to retrieve aircrew information
+  required: true
+  value: "http4://aircrew-service:8080/api/v1/aircrew"
+- name: SKILLS_SERVICE_ENDPOINT
+  displayName: Skills Service Endpoint
+  description: Service used to retrieve skills information
+  required: true
+  value: "http4://skills-service:8080/api/v1/skills"
+- name: KIE_SERVER_CLIENT_URL
+  displayName: URL of the KIE Server
+  description: Kie Server used for decision management
+  required: true
+  value: "http://delivery-scheduler-solver-kieserver:8080/services/rest/server"
+- name: KIE_SERVER_CLIENT_SECRET
+  displayName: KIE Server Client Secret
+  description: Kie server client secret that holds credentials used for the REST API
+  required: true
+  value: kie-server-secret
+- name: KIE_SERVER_CLIENT_TIMEOUT
+  displayName: KIE Server Client Timeout
+  description: Kie server client timeout for REST calls
+  required: true
+  value: '30000'
+- name: KIE_SERVER_CLIENT_MARSHALLING_FORMAT
+  displayName: KIE Server Client Marshalling Format
+  description: Kie server client marshalling format - json, xstream, or jaxb
+  required: false
+  value: xstream
+- name: KIE_SERVER_CLIENT_EXTRA_CLASSES
+  displayName: KIE Server Client Extra Classes
+  description: Kie server client extra classes used for marshalling
+  required: false
+  value: "pocs.optaplanner.delivery.domain.DeliverySchedule,pocs.optaplanner.delivery.domain.skills.Skill,pocs.optaplanner.delivery.domain.DeliveryRole,pocs.optaplanner.delivery.domain.DeliveryAssignment,pocs.optaplanner.delivery.domain.aircrew.Aircrew,pocs.optaplanner.delivery.domain.aircrew.AircrewAvailability,pocs.optaplanner.delivery.domain.aircrew.AircrewAvailabilityState"
+labels:
+  template: http-app-deploy-template

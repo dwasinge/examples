@@ -7,18 +7,20 @@ import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
+import examples.scheduler.domain.common.AbstractPersistable;
 import examples.scheduler.domain.crew.CrewMember;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @PlanningEntity
-public class DeliveryAssignment {
+public class DeliveryAssignment extends AbstractPersistable {
 
-	private String id;
 	private String scheduleId;
 
 	@XStreamConverter(org.kie.soup.commons.xstream.OffsetDateTimeXStreamConverter.class)

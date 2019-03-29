@@ -81,10 +81,14 @@ public class SolverTest {
 		unsolved.setId("0");
 
 		// Delivery Roles
-		DeliveryRole pilot = new DeliveryRole("0", "pilot", new HashSet<>(Arrays.asList("0")));
-		DeliveryRole navigator = new DeliveryRole("1", "navigator", new HashSet<>(Arrays.asList("1")));
-		DeliveryRole deliveryBoy = new DeliveryRole("2", "deliveryBoy", new HashSet<>(Arrays.asList("2")));
-		DeliveryRole robotDeliveryBoy = new DeliveryRole("3", "robotDeliveryBoy", new HashSet<>(Arrays.asList("3")));
+		DeliveryRole pilot = new DeliveryRole("pilot", new HashSet<>(Arrays.asList("0")));
+		pilot.setId("0");
+		DeliveryRole navigator = new DeliveryRole("navigator", new HashSet<>(Arrays.asList("1")));
+		navigator.setId("1");
+		DeliveryRole deliveryBoy = new DeliveryRole("deliveryBoy", new HashSet<>(Arrays.asList("2")));
+		navigator.setId("2");
+		DeliveryRole robotDeliveryBoy = new DeliveryRole("robotDeliveryBoy", new HashSet<>(Arrays.asList("3")));
+		robotDeliveryBoy.setId("3");
 
 		unsolved.getDeliveryRoleList()
 				.addAll(new ArrayList<>(Arrays.asList(pilot, navigator, deliveryBoy, robotDeliveryBoy)));
@@ -107,11 +111,14 @@ public class SolverTest {
 		OffsetDateTime startTime = OffsetDateTime.of(2019, 3, 1, 10, 0, 0, 0, ZoneOffset.UTC);
 		OffsetDateTime endTime = OffsetDateTime.of(2019, 3, 1, 12, 0, 0, 0, ZoneOffset.UTC);
 
-		DeliveryAssignment assignPilot = new DeliveryAssignment("0", "0", startTime, endTime, null, pilot.getId());
-		DeliveryAssignment assignNavigator = new DeliveryAssignment("1", "0", startTime, endTime, null,
+		DeliveryAssignment assignPilot = new DeliveryAssignment("0", startTime, endTime, null, pilot.getId());
+		assignPilot.setId("0");
+		DeliveryAssignment assignNavigator = new DeliveryAssignment("0", startTime, endTime, null,
 				navigator.getId());
-		DeliveryAssignment assignDeliveryBoy = new DeliveryAssignment("2", "0", startTime, endTime, null,
+		assignNavigator.setId("1");
+		DeliveryAssignment assignDeliveryBoy = new DeliveryAssignment("0", startTime, endTime, null,
 				deliveryBoy.getId());
+		assignDeliveryBoy.setId("2");
 
 		unsolved.getDeliveryAssignmentList()
 				.addAll(new ArrayList<>(Arrays.asList(assignPilot, assignNavigator, assignDeliveryBoy)));

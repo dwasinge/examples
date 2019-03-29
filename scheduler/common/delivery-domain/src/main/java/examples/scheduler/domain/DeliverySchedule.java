@@ -17,20 +17,18 @@ import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScore;
 import org.optaplanner.persistence.jaxb.api.score.buildin.hardmediumsoft.HardMediumSoftScoreJaxbXmlAdapter;
 
+import examples.scheduler.domain.common.AbstractPersistable;
 import examples.scheduler.domain.crew.CrewMember;
 import examples.scheduler.domain.crew.CrewMemberAvailability;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @XmlRootElement()
 @XmlAccessorType(XmlAccessType.FIELD)
+@EqualsAndHashCode(callSuper = true)
 @PlanningSolution(autoDiscoverMemberType = AutoDiscoverMemberType.FIELD)
-public class DeliverySchedule {
-
-	private String id;
-
-//	@ProblemFactCollectionProperty
-//	private List<Skill> skillList = new ArrayList<>();
+public class DeliverySchedule extends AbstractPersistable {
 
 	@ProblemFactCollectionProperty
 	private List<DeliveryRole> deliveryRoleList = new ArrayList<>();

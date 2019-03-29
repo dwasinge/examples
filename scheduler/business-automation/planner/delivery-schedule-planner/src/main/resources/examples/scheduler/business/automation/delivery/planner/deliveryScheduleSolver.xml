@@ -1,9 +1,16 @@
 <solver>
 
-	<scanAnnotatedClasses />
-	<scoreDirectorFactory />
+	<!-- Define the model -->
+	<solutionClass>examples.scheduler.domain.DeliverySchedule</solutionClass>
+	<entityClass>examples.scheduler.domain.DeliveryAssignment</entityClass>
+
+	<!-- Define the score function -->
+	<scoreDirectorFactory>
+		<scoreDrl>examples/scheduler/business/automation/delivery/planner/deliverySchedule.drl</scoreDrl>
+	</scoreDirectorFactory>
+
 	<termination>
-		<secondsSpentLimit>5</secondsSpentLimit>
+		<secondsSpentLimit>30</secondsSpentLimit>
 	</termination>
 
 </solver>
