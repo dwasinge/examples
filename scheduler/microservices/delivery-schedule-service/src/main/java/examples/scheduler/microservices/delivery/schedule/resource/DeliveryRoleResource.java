@@ -5,17 +5,22 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import examples.scheduler.domain.DeliveryRole;
 import examples.scheduler.microservices.delivery.schedule.service.DeliveryRoleService;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/delivery/roles")
 public class DeliveryRoleResource {
 
 	private DeliveryRoleService service;
@@ -25,32 +30,33 @@ public class DeliveryRoleResource {
 		this.service = service;
 	}
 
-	@RequestMapping(path = "/delivery/roles", method = RequestMethod.POST)
+	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
 	public DeliveryRole post(@Valid @RequestBody DeliveryRole deliveryRole) {
 		return service.create(deliveryRole);
 	}
 
-	@RequestMapping(path = "/delivery/roles", method = RequestMethod.PUT)
+	@PutMapping
 	public DeliveryRole put(@Valid @RequestBody DeliveryRole deliveryRole) {
 		return service.update(deliveryRole);
 	}
 
-	@RequestMapping(path = "/delivery/roles/{id}", method = RequestMethod.GET)
+	@GetMapping("/{id}")
 	public DeliveryRole get(@PathVariable String id) {
 		return service.get(id);
 	}
 
-	@RequestMapping(path = "/delivery/roles", method = RequestMethod.GET)
+	@GetMapping
 	public Collection<DeliveryRole> getAll() {
 		return service.getAll();
 	}
 
-	@RequestMapping(path = "/delivery/roles/{id}", method = RequestMethod.DELETE)
+	@DeleteMapping("/{id}")
 	public DeliveryRole delete(@PathVariable String id) {
 		return service.delete(id);
 	}
 
-	@RequestMapping(path = "/delivery/roles", method = RequestMethod.DELETE)
+	@DeleteMapping
 	public Collection<DeliveryRole> deleteAll() {
 		return service.deleteAll();
 	}

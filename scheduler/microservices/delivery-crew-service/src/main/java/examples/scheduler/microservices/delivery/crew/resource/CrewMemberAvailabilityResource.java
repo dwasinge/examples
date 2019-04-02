@@ -29,12 +29,12 @@ public class CrewMemberAvailabilityResource {
         this.service = service;
     }
 
-    @PostMapping("/")
+    @PostMapping
     public CrewMemberAvailability post(@NotNull @Valid @RequestBody CrewMemberAvailability crewMemberAvailability) {
         return service.create(crewMemberAvailability);
     }
 
-    @PutMapping("/")
+    @PutMapping
     public CrewMemberAvailability put(@NotNull @Valid @RequestBody CrewMemberAvailability crewMemberAvailability) {
         return service.update(crewMemberAvailability);
     }
@@ -44,7 +44,7 @@ public class CrewMemberAvailabilityResource {
         return service.getById(id);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public Collection<CrewMemberAvailability> getAll() {
         return service.getAll();
     }
@@ -54,7 +54,7 @@ public class CrewMemberAvailabilityResource {
         return service.delete(id);
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping
     public Collection<CrewMemberAvailability> deleteAll() {
         return service.deleteAll();
     }

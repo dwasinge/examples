@@ -3,6 +3,7 @@ package examples.scheduler.microservices.delivery.schedule.service;
 import java.util.Collection;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import examples.scheduler.domain.common.AbstractPersistable;
@@ -12,22 +13,26 @@ import examples.scheduler.domain.exception.ResourceNotFoundException;
 
 public abstract class AbstractMongoService<T extends AbstractPersistable> {
 
+	@Autowired
 	protected MongoRepository<T, String> repository;
-
-	public AbstractMongoService(MongoRepository<T, String> repository) {
-		this.repository = repository;
-	}
 
 	public T create(T persistable) {
 
 		T obj = null;
 
-		// see if object exists with id
-		Optional<T> optional = repository.findById(persistable.getId());
+		String id = persistable.getId();
 
-		// throw exception if already exists
-		if (optional.isPresent()) {
-			throw new ResourceAlreadyExistsException("resource already exists with id '" + persistable.getId() + "'");
+		if (null != id) {
+
+			// see if object exists with id
+			Optional<T> optional = repository.findById(persistable.getId());
+
+			// throw exception if already exists
+			if (optional.isPresent()) {
+				throw new ResourceAlreadyExistsException(
+						"resource already exists with id '" + persistable.getId() + "'");
+			}
+
 		}
 
 		// save the new object to the data store

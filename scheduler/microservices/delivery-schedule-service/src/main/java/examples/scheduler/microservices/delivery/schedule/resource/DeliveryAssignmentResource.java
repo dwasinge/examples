@@ -5,17 +5,22 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import examples.scheduler.domain.DeliveryAssignment;
 import examples.scheduler.microservices.delivery.schedule.service.DeliveryAssignmentService;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/delivery/assignments")
 public class DeliveryAssignmentResource {
 
 	private DeliveryAssignmentService service;
@@ -25,32 +30,33 @@ public class DeliveryAssignmentResource {
 		this.service = service;
 	}
 
-	@RequestMapping(path = "/delivery/assignment", method = RequestMethod.POST)
+	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
 	public DeliveryAssignment post(@Valid @RequestBody DeliveryAssignment deliveryAssignment) {
 		return service.create(deliveryAssignment);
 	}
 
-	@RequestMapping(path = "/delivery/assignment", method = RequestMethod.PUT)
+	@PutMapping
 	public DeliveryAssignment put(@Valid @RequestBody DeliveryAssignment deliveryAssignment) {
 		return service.update(deliveryAssignment);
 	}
 
-	@RequestMapping(path = "/delivery/assignment/{id}", method = RequestMethod.GET)
+	@GetMapping("/{id}")
 	public DeliveryAssignment get(@PathVariable String id) {
 		return service.get(id);
 	}
 
-	@RequestMapping(path = "/delivery/assignment", method = RequestMethod.GET)
+	@GetMapping
 	public Collection<DeliveryAssignment> getAll() {
 		return service.getAll();
 	}
 
-	@RequestMapping(path = "/delivery/assignment/{id}", method = RequestMethod.DELETE)
+	@DeleteMapping("/{id}")
 	public DeliveryAssignment delete(@PathVariable String id) {
 		return service.delete(id);
 	}
 
-	@RequestMapping(path = "/delivery/assignment", method = RequestMethod.DELETE)
+	@DeleteMapping
 	public Collection<DeliveryAssignment> deleteAll() {
 		return service.deleteAll();
 	}

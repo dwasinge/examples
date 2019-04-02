@@ -22,8 +22,10 @@ import examples.scheduler.domain.crew.CrewMember;
 import examples.scheduler.domain.crew.CrewMemberAvailability;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @XmlRootElement()
 @XmlAccessorType(XmlAccessType.FIELD)
 @EqualsAndHashCode(callSuper = true)
@@ -46,5 +48,6 @@ public class DeliverySchedule extends AbstractPersistable {
 	@PlanningScore
 	@XmlJavaTypeAdapter(HardMediumSoftScoreJaxbXmlAdapter.class)
 	private HardMediumSoftScore score = null;
+
 
 }

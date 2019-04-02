@@ -14,7 +14,6 @@
 		<delivery.schedule.planner.version>1.0.0-SNAPSHOT</delivery.schedule.planner.version>
 
 		<spring.version>2.1.2.Final-redhat-00003</spring.version>
-		<camel.version>2.23.1</camel.version>
 		<swagger.version>2.9.2</swagger.version>
 
 		<optaplanner.version>7.14.0.Final-redhat-00004</optaplanner.version>
@@ -37,15 +36,6 @@
 				<scope>import</scope>
 			</dependency>
 
-			<!-- Camel BOM -->
-			<dependency>
-				<groupId>org.apache.camel</groupId>
-				<artifactId>camel-spring-boot-dependencies</artifactId>
-				<version>${camel.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-
 		</dependencies>
 
 	</dependencyManagement>
@@ -57,13 +47,6 @@
 			<groupId>examples.scheduler.common</groupId>
 			<artifactId>delivery-domain</artifactId>
 			<version>${delivery.domain.version}</version>
-		</dependency>
-
-		<!-- Planning KJAR -->
-		<dependency>
-			<groupId>examples.scheduler.business.automation.delivery.planner</groupId>
-			<artifactId>delivery-schedule-planner</artifactId>
-			<version>${delivery.schedule.planner.version}</version>
 		</dependency>
 
 		<!-- Spring -->
@@ -79,37 +62,25 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
-
-		<!-- Camel -->
 		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-spring-boot-starter</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-http4-starter</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jackson</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jsonpath</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-activemq</artifactId>
 		</dependency>
 
-
-		<!--Optaplanner -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.optaplanner</groupId> -->
-		<!-- <artifactId>optaplanner-core</artifactId> -->
-		<!-- <version>${optaplanner.version}</version> -->
-		<!-- </dependency> -->
-
-		<!-- Kie Server Client -->
+		<!-- Optaplanner -->
 		<dependency>
-			<groupId>org.kie.server</groupId>
-			<artifactId>kie-server-client</artifactId>
+			<groupId>org.optaplanner</groupId>
+			<artifactId>optaplanner-core</artifactId>
+			<version>${optaplanner.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.optaplanner</groupId>
+			<artifactId>optaplanner-persistence-jaxb</artifactId>
+			<version>${optaplanner.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.optaplanner</groupId>
+			<artifactId>optaplanner-persistence-jackson</artifactId>
 			<version>${optaplanner.version}</version>
 		</dependency>
 
@@ -128,6 +99,10 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>${swagger.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
 
 		<!-- Test -->
@@ -166,20 +141,9 @@
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>3.6.0.1398</version>
 			</plugin>
-<!-- 
-			<plugin>
-				<groupId>org.owasp</groupId>
-				<artifactId>dependency-check-maven</artifactId>
-				<version>5.0.0-M1</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
- -->
+			<!-- <plugin> <groupId>org.owasp</groupId> <artifactId>dependency-check-maven</artifactId> 
+				<version>5.0.0-M1</version> <executions> <execution> <goals> <goal>check</goal> 
+				</goals> </execution> </executions> </plugin> -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>

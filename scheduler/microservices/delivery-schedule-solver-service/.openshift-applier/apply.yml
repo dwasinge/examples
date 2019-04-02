@@ -1,0 +1,23 @@
+---
+- name: Deploy Spring Boot Application
+  hosts: seed-hosts
+  vars:
+    app_name: delivery-schedule-solver-service
+    ci_cd_namespace: optaplanner-scheduler-ci-cd
+    dev_namespace: optaplanner-scheduler-dev
+    test_namespace: optaplanner-scheduler-test
+    build:
+      NAME: "{{app_name}}"
+      PIPELINE_SOURCE_REPOSITORY_URL: https://github.com/dwasinge/optaplanner-poc.git
+      PIPELINE_SOURCE_REPOSITORY_REF: master
+      PIPELINE_CONTEXT_DIR: "{{app_name}}"
+      S2I_BASE_IMAGE: redhat-openjdk18-openshift:1.4
+    dev:
+      NAME: "{{app_name}}"
+      PIPELINES_NAMESPACE: "{{ci_cd_namespace}}"
+    test:
+      NAME: "{{app_name}}"
+      PIPELINES_NAMESPACE: "{{ci_cd_namespace}}"
+  tasks:
+    - include_role:
+        name: openshift-applier/roles/openshift-applier

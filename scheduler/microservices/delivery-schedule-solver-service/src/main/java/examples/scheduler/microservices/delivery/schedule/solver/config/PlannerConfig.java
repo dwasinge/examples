@@ -1,4 +1,4 @@
-package examples.scheduler.microservices.delivery.schedule.config;
+package examples.scheduler.microservices.delivery.schedule.solver.config;
 
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.springframework.context.annotation.Bean;
@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import examples.scheduler.domain.DeliverySchedule;
 
 @Configuration
-public class SolverConfig {
+public class PlannerConfig {
 
 	private static final String SOLVER_CONFIG = "examples/scheduler/business/automation/delivery/planner/deliveryScheduleSolver.xml";
 
