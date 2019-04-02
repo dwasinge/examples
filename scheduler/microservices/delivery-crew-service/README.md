@@ -22,7 +22,9 @@ Mongo DB Running
 
 If using Docker:
 
-`docker run --name local-mongo -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=mongouser -e MONGO_INITDB_ROOT_PASSWORD=mongopass -e MONGO_INITDB_DATABASE=localMongoDb -d mongo`
+```
+docker run --name local-mongo -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=mongouser -e MONGO_INITDB_ROOT_PASSWORD=mongopass -e MONGO_INITDB_DATABASE=localMongoDb -d mongo
+```
 
 ### Build the application using Maven
 
