@@ -26,7 +26,7 @@ ActiveMQ Running (should only be run once)
 
 If using Docker and have a Red Hat Subscription:
 
-`
+```
 $ docker login registry.redhat.io
 Username: ${REGISTRY-SERVICE-ACCOUNT-USERNAME}
 Password: ${REGISTRY-SERVICE-ACCOUNT-PASSWORD}
@@ -36,7 +36,7 @@ $ docker pull registry.redhat.io/amq-broker-7/amq-broker-72-openshift
 
 $ docker run --name local-amq -p 61616:61616 -e AMQ_USER=amquser -e AMQ_PASSWORD=amqpass -d  registry.redhat.io/amq-broker-7/amq-broker-72-openshift
 
-`
+```
 
 
 ### Build the application using Maven

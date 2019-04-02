@@ -20,10 +20,10 @@ Apache Maven
 
 ### Include in Other Applications
 
-`
+```
 <dependency>
   <groupId>examples.scheduler.common</groupId>
   <artifactId>delivery-domain</artifactId>
   <version>0.0.1</version>
 </dependency>
-`
+```
