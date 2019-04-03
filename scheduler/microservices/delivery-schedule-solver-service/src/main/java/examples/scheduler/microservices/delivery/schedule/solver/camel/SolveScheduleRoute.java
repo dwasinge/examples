@@ -1,6 +1,5 @@
 package examples.scheduler.microservices.delivery.schedule.solver.camel;
 
-import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +18,6 @@ public class SolveScheduleRoute extends RouteBuilder{
 		from(SOLVER_QUEUE_CONSUMER)
 			.routeId(SOLVER_SCHEDULE_ROUTE_ID)
 			.to(EnrichScheduleRoute.SCHEDULE_ENRICHMENT_ROUTE)
-			.log(LoggingLevel.INFO, "enrichment complete - ${body}")
 			.to("solverWrapper");
 		
 	}
