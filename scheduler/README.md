@@ -6,11 +6,16 @@ This application is a sample application that creates the back end services requ
 
 ## Domain Summary
 
-Crew Members - Employees that can be assigned to a delivery
-Crew Member Availability - Employees can specify times that they are unavailable for deliveries
-Delivery Role - Required Role/Skill for a specific delivery
-Delivery Assignment - Maps the a crew member with a given skillset to a delivery role for a specific delivery.
-Delivery Schedule - Wrapper planning solution submitted to the planning engine for solving.
+- Crew Member 
+  - Employees that can be assigned to a delivery
+- Crew Member Availability 
+  - Employees can specify times that they are unavailable for deliveries
+- Delivery Role 
+  - Required Role/Skill for a specific delivery
+- Delivery Assignment 
+  - Maps the a crew member with a given skillset to a delivery role for a specific delivery.
+- Delivery Schedule 
+  - Wrapper planning solution submitted to the planning engine for solving.
 
 ## Documentation
 
