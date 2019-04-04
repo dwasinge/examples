@@ -8,22 +8,15 @@ openshift_cluster_content:
     namespace: "{{ ci_cd_namespace }}"
     tags:
       - build
-- object: secrets
-  content:
-  - name: "application key store secret"
-    file: "{{ inventory_dir }}/../secrets/kie-server-secret.yml"
-    namespace: "{{ dev_namespace }}"
-    tags:
-      - secret
-      - dev-secrets
-  - name: "application key store secret"
-    file: "{{ inventory_dir }}/../secrets/kie-server-secret.yml"
-    namespace: "{{ test_namespace }}"
-    tags:
-      - secret
-      - test-secrets
 - object: deployments
   content:
+  - name: "deploy amq for applications"
+    template: "{{ inventory_dir }}/../templates/amq63-basic.yml"
+    params_from_vars: "{{ amq }}"
+    namespace: "{{ dev_namespace }}"
+    tags:
+      - deployment
+      - dev-deployments
   - name: "deploy application to dev environment"
     template: "{{ inventory_dir }}/../templates/http-app-deploy-template.yml"
     params_from_vars: "{{ dev }}"
@@ -31,6 +24,13 @@ openshift_cluster_content:
     tags:
       - deployment
       - dev-deployments
+  - name: "deploy amq for applications"
+    template: "{{ inventory_dir }}/../templates/amq63-basic.yml"
+    params_from_vars: "{{ amq }}"
+    namespace: "{{ test_namespace }}"
+    tags:
+      - deployment
+      - test-deployments
   - name: "deploy application to test environment"
     template: "{{ inventory_dir }}/../templates/http-app-deploy-template.yml"
     params_from_vars: "{{ test }}"
@@ -38,3 +38,4 @@ openshift_cluster_content:
     tags:
       - deployment
       - test-deployments
+

@@ -29,7 +29,7 @@
       MONGODB_SECRET: "{{ app_name }}-mongodb"
       MQ_USERNAME: "{{parent_app_name}}-user"
       MQ_PASSWORD: "{{parent_app_name}}-pass"
-      MQ_BROKER_URL: "{{ parent_app_name }}-amq-tcp:61616"
+      MQ_BROKER_URL: "{{ parent_app_name }}"
     test:
       NAME: "{{app_name}}"
       PIPELINES_NAMESPACE: "{{ci_cd_namespace}}"
@@ -37,7 +37,7 @@
       MONGODB_SECRET: "{{ app_name }}-mongodb"
       MQ_USERNAME: "{{parent_app_name}}-user"
       MQ_PASSWORD: "{{parent_app_name}}-pass"
-      MQ_BROKER_URL: "{{ parent_app_name }}-amq-tcp:61616"
+      MQ_BROKER_URL: "{{ parent_app_name }}"
   tasks:
     - include_role:
         name: openshift-applier/roles/openshift-applier

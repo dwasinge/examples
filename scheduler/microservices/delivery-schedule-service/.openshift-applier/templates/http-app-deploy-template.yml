@@ -73,7 +73,7 @@ objects:
           - name: SPRING_ACTIVEMQ_PASSWORD
             value: ${MQ_PASSWORD}
           - name: SPRING_ACTIVEMQ_BROKER-URL
-            value: ${MQ_BROKER_URL}
+            value: "tcp://${MQ_BROKER_URL}-amq-tcp:61616"
           image: "${NAME}"
           imagePullPolicy: Always
           name: "${NAME}"

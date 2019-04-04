@@ -43,34 +43,18 @@ objects:
       spec:
         containers:
         - env:
-            - name: SERVER_PORT
-              value: "${SERVER_PORT}"
-            - name: MANAGEMENT_CONTEXT_PATH
-              value: "${MANAGEMENT_CONTEXT_PATH}"
-            - name: MANAGEMENT_SERVER_PORT
-              value: ${MANAGEMENT_SERVER_PORT}
-            - name: AIRCREW_SERVICE_ENDPOINT
-              value: "${AIRCREW_SERVICE_ENDPOINT}"
-            - name: SKILLS_SERVICE_ENDPOINT
-              value: "${SKILLS_SERVICE_ENDPOINT}"
-            - name: KIE_SERVER_CLIENT_URL
-              value: "${KIE_SERVER_CLIENT_URL}"
-            - name: KIE_SERVER_CLIENT_USER
-              valueFrom:
-                secretKeyRef:
-                  key: username
-                  name: "${KIE_SERVER_CLIENT_SECRET}"
-            - name: KIE_SERVER_CLIENT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: password
-                  name: "${KIE_SERVER_CLIENT_SECRET}"
-            - name: KIE_SERVER_CLIENT_TIMEOUT
-              value: "${KIE_SERVER_CLIENT_TIMEOUT}"
-            - name: KIE_SERVER_CLIENT_MARSHALLING_FORMAT
-              value: "${KIE_SERVER_CLIENT_MARSHALLING_FORMAT}"
-            - name: KIE_SERVER_CLIENT_EXTRA_CLASSES
-              value: "${KIE_SERVER_CLIENT_EXTRA_CLASSES}"
+          - name: SERVER_PORT
+            value: ${SERVER_PORT}
+          - name: MANAGEMENT_CONTEXT-PATH
+            value: "${MANAGEMENT_CONTEXT}"
+          - name: MANAGEMENT_SERVER_PORT
+            value: ${MANAGEMENT_SERVER_PORT}
+          - name: SPRING_ACTIVEMQ_USER
+            value: ${MQ_USERNAME}
+          - name: SPRING_ACTIVEMQ_PASSWORD
+            value: ${MQ_PASSWORD}
+          - name: SPRING_ACTIVEMQ_BROKER-URL
+            value: "tcp://${MQ_BROKER_URL}-amq-tcp:61616"
           image: "${NAME}"
           imagePullPolicy: Always
           name: "${NAME}"
@@ -162,7 +146,7 @@ parameters:
   description: The port the application will liston on
   required: true
   value: "8080"
-- name: MANAGEMENT_CONTEXT_PATH
+- name: MANAGEMENT_CONTEXT
   displayName: Spring context for liveness and health checks
   description: Spring context for liveness and health checks
   required: true
@@ -172,40 +156,14 @@ parameters:
   description: Port for liveness and health checks
   required: true
   value: "8081"
-- name: AIRCREW_SERVICE_ENDPOINT
-  displayName: Aircrew Service Endpoint
-  description: Service used to retrieve aircrew information
+- name: MQ_USERNAME
+  displayName: Configured user for ActiveMQ
   required: true
-  value: "http4://aircrew-service:8080/api/v1/aircrew"
-- name: SKILLS_SERVICE_ENDPOINT
-  displayName: Skills Service Endpoint
-  description: Service used to retrieve skills information
+- name: MQ_PASSWORD
+  displayName: Configured password for ActiveMQ
   required: true
-  value: "http4://skills-service:8080/api/v1/skills"
-- name: KIE_SERVER_CLIENT_URL
-  displayName: URL of the KIE Server
-  description: Kie Server used for decision management
+- name: MQ_BROKER_URL
+  displayName: URL for the instance of ActiveMQ
   required: true
-  value: "http://delivery-scheduler-solver-kieserver:8080/services/rest/server"
-- name: KIE_SERVER_CLIENT_SECRET
-  displayName: KIE Server Client Secret
-  description: Kie server client secret that holds credentials used for the REST API
-  required: true
-  value: kie-server-secret
-- name: KIE_SERVER_CLIENT_TIMEOUT
-  displayName: KIE Server Client Timeout
-  description: Kie server client timeout for REST calls
-  required: true
-  value: '30000'
-- name: KIE_SERVER_CLIENT_MARSHALLING_FORMAT
-  displayName: KIE Server Client Marshalling Format
-  description: Kie server client marshalling format - json, xstream, or jaxb
-  required: false
-  value: xstream
-- name: KIE_SERVER_CLIENT_EXTRA_CLASSES
-  displayName: KIE Server Client Extra Classes
-  description: Kie server client extra classes used for marshalling
-  required: false
-  value: "pocs.optaplanner.delivery.domain.DeliverySchedule,pocs.optaplanner.delivery.domain.skills.Skill,pocs.optaplanner.delivery.domain.DeliveryRole,pocs.optaplanner.delivery.domain.DeliveryAssignment,pocs.optaplanner.delivery.domain.aircrew.Aircrew,pocs.optaplanner.delivery.domain.aircrew.AircrewAvailability,pocs.optaplanner.delivery.domain.aircrew.AircrewAvailabilityState"
 labels:
   template: http-app-deploy-template
