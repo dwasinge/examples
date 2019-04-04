@@ -17,7 +17,7 @@ $ git clone https://github.com/rht-labs/labs-ci-cd.git
 $ cd labs-ci-cd
 
 # Switch to the latest Tag (v3.11.5 when this was written)
-$ git checkout -b v3.11.5
+$ git checkout v3.11.5
 
 ```
 
@@ -27,13 +27,11 @@ $ git checkout -b v3.11.5
 ansible-galaxy install -r requirements.yml --roles-path=roles
 ```
 
-### Create the OpenShift Projects/Namespaces:
+### Create the OpenShift Projects/Namespaces and Tooling Deployments:
 
-ansible-playbook site.yml -e ci_cd_namespace=examples-scheduler-ci-cd -e dev_namespace=examples-scheduler-dev -e test_namespace=examples-scheduler-test -l bootstrap
-
-### Create CI CD Tooling Deployments:
-
-ansible-playbook site.yml -e ci_cd_namespace=examples-scheduler-ci-cd -e dev_namespace=examples-scheduler-dev -e test_namespace=examples-scheduler-test -l tools
+```
+ansible-playbook site.yml -e ci_cd_namespace=examples-scheduler-ci-cd -e dev_namespace=examples-scheduler-dev -e test_namespace=examples-scheduler-test
+```
 
 ## Create Scheduling Pipelines and Services
 

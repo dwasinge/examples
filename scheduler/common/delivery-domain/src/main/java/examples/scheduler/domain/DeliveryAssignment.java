@@ -9,6 +9,7 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 import examples.scheduler.domain.common.AbstractPersistable;
 import examples.scheduler.domain.crew.CrewMember;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,6 +30,7 @@ public class DeliveryAssignment extends AbstractPersistable {
 	@XStreamConverter(org.kie.soup.commons.xstream.OffsetDateTimeXStreamConverter.class)
 	private OffsetDateTime endDateTime;
 
+	@ApiModelProperty(hidden = true)
 	@PlanningVariable(valueRangeProviderRefs = { "availableCrewMember" }, nullable = true)
 	private CrewMember crewMember;
 

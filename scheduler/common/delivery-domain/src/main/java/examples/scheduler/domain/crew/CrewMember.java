@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import examples.scheduler.domain.common.AbstractPersistable;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class CrewMember extends AbstractPersistable {
 
-	@NotBlank
+	@ApiModelProperty(hidden = true)
 	private String accountNumber;
 	@NotBlank
 	private String firstName;
