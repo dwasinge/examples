@@ -55,6 +55,16 @@ objects:
             value: ${MQ_PASSWORD}
           - name: SPRING_ACTIVEMQ_BROKER-URL
             value: "tcp://${MQ_BROKER_URL}-amq-tcp:61616"
+          - name: CREW_MEMBER_SERVICE_ENDPOINT
+            value: ${CREW_MEMBER_SERVICE_ENDPOINT}
+          - name: CREW_MEMBER_AVAILABILITY_SERVICE_ENDPOINT
+            value: ${CREW_MEMBER_AVAILABILITY_SERVICE_ENDPOINT}
+          - name: SKILLS_SERVICE_ENDPOINT
+            value: ${SKILLS_SERVICE_ENDPOINT}
+          - name: DELIVERY_SCHEDULE_ROLE_ENDPOINT
+            value: ${DELIVERY_SCHEDULE_ROLE_ENDPOINT}
+          - name: DELIVERY_SCHEDULE_ASSIGNMENT_ENDPOINT
+            value: ${DELIVERY_SCHEDULE_ASSIGNMENT_ENDPOINT}
           image: "${NAME}"
           imagePullPolicy: Always
           name: "${NAME}"
@@ -164,6 +174,21 @@ parameters:
   required: true
 - name: MQ_BROKER_URL
   displayName: URL for the instance of ActiveMQ
+  required: true
+- name: CREW_MEMBER_SERVICE_ENDPOINT
+  displayName: Endpoint that provides crew member data
+  required: true
+- name: CREW_MEMBER_AVAILABILITY_SERVICE_ENDPOINT
+  displayName: Endpoint that provides crew member availability data
+  required: true
+- name: SKILLS_SERVICE_ENDPOINT
+  displayName: Endpoint that provides skills data
+  required: true
+- name: DELIVERY_SCHEDULE_ROLE_ENDPOINT
+  displayName: Endpoint that provides schedule role data
+  required: true
+- name: DELIVERY_SCHEDULE_ASSIGNMENT_ENDPOINT
+  displayName: Endpoint that provides schedule assignment data
   required: true
 labels:
   template: http-app-deploy-template

@@ -23,12 +23,26 @@
       MQ_USERNAME: "{{parent_app_name}}-user"
       MQ_PASSWORD: "{{parent_app_name}}-pass"
       MQ_BROKER_URL: "{{ parent_app_name }}"
+      CREW_MEMBER_SERVICE_ENDPOINT: http4://delivery-crew-service:8080/api/v1/crew/members
+      CREW_MEMBER_AVAILABILITY_SERVICE_ENDPOINT: http4://delivery-crew-servvice:8080/api/v1/crew/members/availability
+      SKILLS_SERVICE_ENDPOINT: http4://delivery-skills-service:8080/api/v1/skills
+      DELIVERY_SCHEDULE_ROLE_ENDPOINT: http4://delivery-schedule-service:8080/api/v1/delivery/roles
+      DELIVERY_SCHEDULE_ASSIGNMENT_ENDPOINT: http4://delivery-schedule-service:8080/api/v1/delivery/assignments
     test:
       NAME: "{{app_name}}"
       PIPELINES_NAMESPACE: "{{ci_cd_namespace}}"
       MQ_USERNAME: "{{parent_app_name}}-user"
       MQ_PASSWORD: "{{parent_app_name}}-pass"
       MQ_BROKER_URL: "{{ parent_app_name }}"
+      CREW_MEMBER_SERVICE_ENDPOINT: http4://delivery-crew-service:8080/api/v1/crew/members
+      CREW_MEMBER_AVAILABILITY_SERVICE_ENDPOINT: http4://delivery-crew-servvice:8080/api/v1/crew/members/availability
+      SKILLS_SERVICE_ENDPOINT: http4://delivery-skills-service:8080/api/v1/skills
+      DELIVERY_SCHEDULE_ROLE_ENDPOINT: http4://delivery-schedule-service:8080/api/v1/delivery/roles
+      DELIVERY_SCHEDULE_ASSIGNMENT_ENDPOINT: http4://delivery-schedule-service:8080/api/v1/delivery/assignments
   tasks:
     - include_role:
         name: openshift-applier/roles/openshift-applier
+
+
+
+
