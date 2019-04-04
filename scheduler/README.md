@@ -4,6 +4,7 @@
 
 * Git installed
 * The OC client installed
+  * log into the OpenShift cluster with the OC CLI
 
 ## Create Projects and CI CD Tooling
 
@@ -32,6 +33,8 @@ ansible-galaxy install -r requirements.yml --roles-path=roles
 ```
 ansible-playbook site.yml -e ci_cd_namespace=examples-scheduler-ci-cd -e dev_namespace=examples-scheduler-dev -e test_namespace=examples-scheduler-test
 ```
+
+NOTE: Validate that the Jenkins Pod is running in the namespace 'examples-scheduler.ci-cd' before continuing.
 
 ## Create Scheduling Pipelines and Services
 
