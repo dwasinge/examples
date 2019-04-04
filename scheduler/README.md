@@ -1,109 +1,32 @@
-# Installation into an OpenShift Cluster
+# Scheduling Application
 
-## Requirements
+## Overview
 
-* Git installed
-* The OC client installed
-  * log into the OpenShift cluster with the OC CLI
+This application is a sample application that creates the back end services required to schedule people for delivery assignments.  The application uses Optaplanner as its planning engine to map people to delivery assignments.
 
-## Create Projects and CI CD Tooling
+## Domain Summary
 
-We will be using the Labs CI CD Repository to create the required objects in OpenShift.  The following repository contains the inventories that will be installed.
+Crew Members - Employees that can be assigned to a delivery
+Crew Member Availability - Employees can specify times that they are unavailable for deliveries
+Delivery Role - Required Role/Skill for a specific delivery
+Delivery Assignment - Maps the a crew member with a given skillset to a delivery role for a specific delivery.
+Delivery Schedule - Wrapper planning solution submitted to the planning engine for solving.
 
-```
-# clone the repository
-$ git clone https://github.com/rht-labs/labs-ci-cd.git
+## Documentation
 
-# change to the repository directory
-$ cd labs-ci-cd
+### Project Summary
 
-# Switch to the latest Tag (v3.11.5 when this was written)
-$ git checkout v3.11.5
+- [Delivery Domain](common/delivery-domain/README.md)
+  - Project contains all common domain classes
+- [Delivery Schedule Planner](business-automation/planner/delivery-schedule-planner/README.md)
+  - Project contains all business automation artifacts for the rules/planning engine
+- [Delivery Crew Service](microservices/delivery-crew-service/README.md)
+  - Project exposes a REST API to manage all crew and their availability
+- [Delivery Schedule Service](microservices/delivery-schedule-service/README.md)
+  - Project exposes a REST API to manage all deliveries and mappings
+- [Delivery Schedule Solver Service](microservices/delivery-schedule-solver-service/README.md)
+  - JMS application that asyncronously solves planning problems and places solution on queue for processing
 
-```
+### Installation
 
-### Install Required Roles:
-
-```
-ansible-galaxy install -r requirements.yml --roles-path=roles
-```
-
-### Create the OpenShift Projects/Namespaces and Tooling Deployments:
-
-```
-ansible-playbook site.yml -e ci_cd_namespace=examples-scheduler-ci-cd -e dev_namespace=examples-scheduler-dev -e test_namespace=examples-scheduler-test
-```
-
-NOTE: Validate that the Jenkins Pod is running in the namespace 'examples-scheduler.ci-cd' before continuing.
-
-## Create Scheduling Pipelines and Services
-
-If you haven't already get this repository by cloning it.
-
-```
-$ git clone https://github.com/dwasinge/examples.git
-```
-### Create Pipeline and Build Scheduler Domain JAR
-
-```
-# change to the applier directory for the delivery-domain project
-cd ${REPO_BASE_DIR}/scheduler/common/delivery-domain/.openshift-applier
-
-# install required roles for applier
-$ ansible-galaxy install -r requirements.yml --roles-path=roles
-
-# run the ansible playbook on the delivery-domain inventory
-$ ansible-playbook apply.yml -i inventory/
-```
-
-### Create the Pipeline and Build Scheduler Planning KJAR
-
-```
-# change to the applier directory for the delivery-domain project
-cd ${REPO_BASE_DIR}/scheduler/business-automation/planner/delivery-schedule-planner/.openshift-applier
-
-# install required roles for applier
-$ ansible-galaxy install -r requirements.yml --roles-path=roles
-
-# run the ansible playbook on the delivery-domain inventory
-$ ansible-playbook apply.yml -i inventory/
-```
-
-### Create the Pipeline, Build, and Deployment for delivery-crew-service project
-
-```
-# change to the applier directory for the delivery-crew-service project
-cd ${REPO_BASE_DIR}/scheduler/microservices/delivery-crew-service/.openshift-applier
-
-# install required roles for applier
-$ ansible-galaxy install -r requirements.yml --roles-path=roles
-
-# run the ansible playbook on the delivery-crew-service inventory
-$ ansible-playbook apply.yml -i inventory/
-```
-
-### Create the Pipeline, Build, and Deployment for delivery-schedule-service project
-
-```
-# change to the applier directory for the delivery-schedule-service project
-cd ${REPO_BASE_DIR}/scheduler/microservices/delivery-schedule-service/.openshift-applier
-
-# install required roles for applier
-$ ansible-galaxy install -r requirements.yml --roles-path=roles
-
-# run the ansible playbook on the delivery-schedule-service inventory
-$ ansible-playbook apply.yml -i inventory/
-```
-
-### Create the Pipeline, Build, and Deployment for delivery-schedule-solver-service project
-
-```
-# change to the applier directory for the delivery-schedule-solver-service project
-cd ${REPO_BASE_DIR}/scheduler/microservices/delivery-schedule-service/.openshift-applier
-
-# install required roles for applier
-$ ansible-galaxy install -r requirements.yml --roles-path=roles
-
-# run the ansible playbook on the delivery-schedule-solver-service inventory
-$ ansible-playbook apply.yml -i inventory/
-
+- [Install on OpenShift Cluster](docs/openshift-installation.md)
