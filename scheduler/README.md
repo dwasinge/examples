@@ -71,26 +71,38 @@ $ ansible-playbook apply.yml -i inventory/
 ### Create the Pipeline, Build, and Deployment for delivery-crew-service project
 
 ```
-# change to the applier directory for the delivery-domain project
+# change to the applier directory for the delivery-crew-service project
 cd ${REPO_BASE_DIR}/scheduler/microservices/delivery-crew-service/.openshift-applier
 
 # install required roles for applier
 $ ansible-galaxy install -r requirements.yml --roles-path=roles
 
-# run the ansible playbook on the delivery-domain inventory
+# run the ansible playbook on the delivery-crew-service inventory
 $ ansible-playbook apply.yml -i inventory/
 ```
 
 ### Create the Pipeline, Build, and Deployment for delivery-schedule-service project
 
 ```
-# change to the applier directory for the delivery-domain project
+# change to the applier directory for the delivery-schedule-service project
 cd ${REPO_BASE_DIR}/scheduler/microservices/delivery-schedule-service/.openshift-applier
 
 # install required roles for applier
 $ ansible-galaxy install -r requirements.yml --roles-path=roles
 
-# run the ansible playbook on the delivery-domain inventory
+# run the ansible playbook on the delivery-schedule-service inventory
 $ ansible-playbook apply.yml -i inventory/
 ```
+
+### Create the Pipeline, Build, and Deployment for delivery-schedule-solver-service project
+
+```
+# change to the applier directory for the delivery-schedule-solver-service project
+cd ${REPO_BASE_DIR}/scheduler/microservices/delivery-schedule-service/.openshift-applier
+
+# install required roles for applier
+$ ansible-galaxy install -r requirements.yml --roles-path=roles
+
+# run the ansible playbook on the delivery-schedule-solver-service inventory
+$ ansible-playbook apply.yml -i inventory/
 

@@ -2,7 +2,7 @@
 - name: Deploy Spring Boot Application
   hosts: seed-hosts
   vars:
-    app_name: delivery-schedule-service
+    app_name: delivery-schedule-solver-service
     parent_app_name: scheduler-app
     ci_cd_namespace: examples-scheduler-ci-cd
     dev_namespace: examples-scheduler-dev
