@@ -69,9 +69,11 @@ objects:
                 key: database-password
                 name: "${MONGODB_SECRET}"
           - name: SPRING_ACTIVEMQ_USER
-            value: ${MQ_USER}
+            value: ${MQ_USERNAME}
           - name: SPRING_ACTIVEMQ_PASSWORD
             value: ${MQ_PASSWORD}
+          - name: SPRING_ACTIVEMQ_BROKER-URL
+            value: ${MQ_BROKER_URL}
           image: "${NAME}"
           imagePullPolicy: Always
           name: "${NAME}"
@@ -185,11 +187,14 @@ parameters:
 - name: MONGODB_SECRET
   displayName: Secret containing the credentials for the Mongo DB instance
   required: true
-- name: MQ_USER
+- name: MQ_USERNAME
   displayName: Configured user for ActiveMQ
   required: true
 - name: MQ_PASSWORD
   displayName: Configured password for ActiveMQ
+  required: true
+- name: MQ_BROKER_URL
+  displayName: URL for the instance of ActiveMQ
   required: true
 labels:
   template: http-app-deploy-template

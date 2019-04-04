@@ -31,25 +31,25 @@ openshift_cluster_content:
     tags:
       - deployment
       - dev-deployments
-#  - name: "deploy mongo database for application"
-#    template: "{{ inventory_dir }}/../templates/mongodb-persistent.yml"
-#    params_from_vars: "{{ mongodb }}"
-#    namespace: "{{ test_namespace }}"
-#    tags:
-#      - deployment
-#      - test-deployments
-#  - name: "deploy amq for applications"
-#    template: "{{ inventory_dir }}/../templates/amq63-basic.yml"
-#    params_from_vars: "{{ amq }}"
-#    namespace: "{{ test_namespace }}"
-#    tags:
-#      - deployment
-#      - test-deployments
-#  - name: "deploy application to test environment"
-#    template: "{{ inventory_dir }}/../templates/http-app-deploy-template.yml"
-#    params_from_vars: "{{ test }}"
-#    namespace: "{{ test_namespace }}"
-#    tags:
-#      - deployment
-#      - test-deployments
+  - name: "deploy mongo database for application"
+    template: "{{ inventory_dir }}/../templates/mongodb-persistent.yml"
+    params_from_vars: "{{ mongodb }}"
+    namespace: "{{ test_namespace }}"
+    tags:
+      - deployment
+      - test-deployments
+  - name: "deploy amq for applications"
+    template: "{{ inventory_dir }}/../templates/amq63-basic.yml"
+    params_from_vars: "{{ amq }}"
+    namespace: "{{ test_namespace }}"
+    tags:
+      - deployment
+      - test-deployments
+  - name: "deploy application to test environment"
+    template: "{{ inventory_dir }}/../templates/http-app-deploy-template.yml"
+    params_from_vars: "{{ test }}"
+    namespace: "{{ test_namespace }}"
+    tags:
+      - deployment
+      - test-deployments
 

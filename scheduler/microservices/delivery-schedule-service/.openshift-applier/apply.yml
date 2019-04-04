@@ -27,11 +27,17 @@
       PIPELINES_NAMESPACE: "{{ci_cd_namespace}}"
       MONGODB_HOST: "{{ app_name }}-mongodb"
       MONGODB_SECRET: "{{ app_name }}-mongodb"
+      MQ_USERNAME: "{{parent_app_name}}-user"
+      MQ_PASSWORD: "{{parent_app_name}}-pass"
+      MQ_BROKER_URL: "{{ parent_app_name }}-amq-tcp:61616"
     test:
       NAME: "{{app_name}}"
       PIPELINES_NAMESPACE: "{{ci_cd_namespace}}"
       MONGODB_HOST: "{{ app_name }}-mongodb"
       MONGODB_SECRET: "{{ app_name }}-mongodb"
+      MQ_USERNAME: "{{parent_app_name}}-user"
+      MQ_PASSWORD: "{{parent_app_name}}-pass"
+      MQ_BROKER_URL: "{{ parent_app_name }}-amq-tcp:61616"
   tasks:
     - include_role:
         name: openshift-applier/roles/openshift-applier
